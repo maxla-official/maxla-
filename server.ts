@@ -1,7 +1,7 @@
 import express from "express";
 import path from "path";
 import { createServer as createViteServer } from "vite";
-import { GoogleGenAI, Type } from "@google/genai";
+import { GoogleGenAI as MaxlaEngine, Type } from "@google/genai";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -20,19 +20,19 @@ const PORT = 3000;
 
 app.use(express.json({ limit: "10mb" }));
 
-// Lazy GoogleGenAI initialization
-let aiClient: GoogleGenAI | null = null;
-function getAI(): GoogleGenAI | null {
-  const apiKey = process.env.GEMINI_API_KEY;
+// Lazy MAXLA Intelligence Engine initialization
+let aiClient: MaxlaEngine | null = null;
+function getAI(): MaxlaEngine | null {
+  const apiKey = process.env.MAXLA_API_KEY;
   if (!apiKey) {
     return null;
   }
   if (!aiClient) {
-    aiClient = new GoogleGenAI({
+    aiClient = new MaxlaEngine({
       apiKey,
       httpOptions: {
         headers: {
-          "User-Agent": "aistudio-build",
+          "User-Agent": "maxla-engine",
         },
       },
     });
@@ -40,12 +40,16 @@ function getAI(): GoogleGenAI | null {
   return aiClient;
 }
 
+// Upstream inference model identifier required by the intelligence API endpoint.
+// Override via MAXLA_MODEL without changing application code.
+const MAXLA_MODEL = process.env.MAXLA_MODEL || "gemini-3.8-flash";
+
 // Health check endpoint
 app.get("/api/health", (_req, res) => {
   res.json({
     status: "ok",
-    app: "Maxla",
-    hasApiKey: !!process.env.GEMINI_API_KEY,
+    app: "MAXLA OMEGA",
+    hasApiKey: !!process.env.MAXLA_API_KEY,
     timestamp: new Date().toISOString(),
   });
 });
@@ -154,7 +158,7 @@ Constraints specified: ${Array.isArray(constraints) ? constraints.join(", ") : "
 Return a comprehensive JSON matching the exact schema with rigorous, concrete, executive-ready insights. Avoid vague fluff; provide quantifiable metrics, real-world trade-offs, and operational milestones.`;
 
     const response = await ai.models.generateContent({
-      model: "gemini-3.8-flash",
+      model: MAXLA_MODEL,
       contents: prompt,
       config: {
         responseMimeType: "application/json",
@@ -315,8 +319,8 @@ Return a comprehensive JSON matching the exact schema with rigorous, concrete, e
     const parsed = JSON.parse(rawText || "{}");
     return res.json({
       data: parsed,
-      source: "gemini",
-      message: "Generated live by Maxla Executive Intelligence",
+      source: "maxla",
+      message: "Generated live by MAXLA Executive Intelligence",
     });
   } catch (error: any) {
     console.error("Error in /api/maxla/solve:", error);

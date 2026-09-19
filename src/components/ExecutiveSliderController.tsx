@@ -320,7 +320,7 @@ export const ExecutiveSliderController: React.FC<ExecutiveSliderControllerProps>
                 onClick={handleAutoCalibrate}
                 disabled={isAutoCalibrating}
                 className="py-2 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 border border-indigo-500/50 text-xs font-semibold flex items-center justify-center space-x-1.5 transition active:scale-95 disabled:opacity-50"
-                title="Use Gemini AI to dynamically optimize sensitivity index"
+                title="Use MAXLA Intelligence Engine to dynamically optimize sensitivity index"
               >
                 <Sparkles className={`w-3.5 h-3.5 text-amber-400 ${isAutoCalibrating ? "animate-spin" : ""}`} />
                 <span className="hidden sm:inline">AI Optimize</span>

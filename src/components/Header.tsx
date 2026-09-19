@@ -1,7 +1,7 @@
 import React from "react";
 import {
   Layers,
-  Sparkles,
+  Cpu,
   Download,
   PlusCircle,
   FolderOpen,
@@ -212,8 +212,8 @@ export const Header: React.FC<HeaderProps> = ({
 
           <div className="flex items-center space-x-3 text-slate-400 text-[11px]">
             <div className="flex items-center space-x-1.5">
-              <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-              <span>Gemini 3.8 Flash Solver</span>
+              <Cpu className="w-3.5 h-3.5 text-amber-400" />
+              <span>MAXLA Intelligence Engine</span>
             </div>
             <div className="flex items-center space-x-1.5">
               <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
