@@ -258,7 +258,7 @@ export const AssetDetailModal: React.FC<AssetDetailModalProps> = ({
                       y1={padY}
                       x2={hoveredPoint.x}
                       y2={padY + graphHeight}
-                      stroke="#c9a86a"
+                      stroke="#818cf8"
                       strokeWidth="1.5"
                       strokeDasharray="2 2"
                     />
@@ -266,7 +266,7 @@ export const AssetDetailModal: React.FC<AssetDetailModalProps> = ({
                       cx={hoveredPoint.x}
                       cy={hoveredPoint.y}
                       r="5"
-                      fill="#c9a86a"
+                      fill="#818cf8"
                       stroke="#ffffff"
                       strokeWidth="2"
                     />
